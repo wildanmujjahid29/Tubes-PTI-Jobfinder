@@ -1,9 +1,9 @@
-@extends('layouts.main')
+@extends('layouts.fiture')
 
 @section('content')
 <div class="min-h-screen py-8 bg-gray-50">
     <div class="container max-w-6xl px-4 mx-auto">
-        <div class="grid gap-6 md:grid-cols-3">
+        <div class="grid gap-6 mt-10 md:grid-cols-3">
             {{-- Sidebar: Company Information --}}
             <div class="md:col-span-1">
                 <div class="h-full overflow-hidden bg-white shadow-xl rounded-2xl">

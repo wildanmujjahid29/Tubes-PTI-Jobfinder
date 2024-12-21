@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 
 // Halaman Utama
 Route::get('/', [JobController::class, 'index'])->name('index');
@@ -26,4 +27,6 @@ Auth::routes();
 // Halaman Dashboard/Home
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+// Route Untuk Profile User
+Route::get('/profile', [ProfileController::class, 'userProfile'])->name('profile');
 

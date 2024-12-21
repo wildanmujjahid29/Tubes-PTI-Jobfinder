@@ -12,7 +12,7 @@
 <body class="font-sans bg-gray-100">
     {{-- Navbar --}}
     <header>
-        <nav class="sticky top-0 z-50 shadow-md bg-gradient-to-r from-blue-700 to-blue-800">
+        <nav class="fixed top-0 left-0 z-50 w-full shadow-md bg-gradient-to-r from-blue-700 to-blue-800">
             <div class="container flex items-center justify-between px-6 py-4 mx-auto">
                 {{-- Brand Logo --}}
                 <a href="{{ url('/') }}" class="text-2xl font-bold text-white">
@@ -33,9 +33,14 @@
                             </svg>
                         </button>
                         <div id="dropdownMenu" class="absolute right-0 z-10 hidden w-40 py-2 mt-2 bg-white rounded-lg shadow-lg">
+                            <a href="{{ route('profile') }}" class="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100">
+                                Profile
+                            </a>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit" class="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100">Logout</button>
+                                <button type="submit" class="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100">
+                                    Logout
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -56,9 +61,10 @@
             {{-- Mobile Menu --}}
             <div id="mobileMenu" class="hidden bg-blue-600 lg:hidden">
                 <div class="flex flex-col items-center py-4 space-y-4">
-                    <a href="#jobs" class="text-sm font-medium text-white transition hover:text-yellow-300">Find Jobs</a>
-                    <a href="#about" class="text-sm font-medium text-white transition hover:text-yellow-300">About Us</a>
-                    <a href="#contact" class="text-sm font-medium text-white transition hover:text-yellow-300">Contact</a>
+                    <a href="#company" class="text-sm font-medium text-white transition hover:text-yellow-300">Company</a>
+                    <a href="#filter" class="text-sm font-medium text-white transition hover:text-yellow-300">Job</a>
+                    <a href="#" class="text-sm font-medium text-white transition hover:text-yellow-300">About</a>
+                    <a href="{{ route('profile') }}" class="text-sm font-medium text-white transition hover:text-yellow-300">Profile</a>
                     @auth
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
@@ -78,7 +84,6 @@
     <main>@yield('content')</main>
     
     @stack('scripts')
-    <script src="js/burger.js"></script>
     
     {{-- Footer --}}
     <footer class="text-gray-300 bg-gray-800">
@@ -123,5 +128,35 @@
             <p class="text-sm text-gray-400">&copy; 2024 JobFinder. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const dropdownToggle = document.getElementById('dropdownToggle');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+
+            // Mobile menu toggle
+            mobileMenuToggle.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Dropdown toggle for mobile
+            if (dropdownToggle && dropdownMenu) {
+                dropdownToggle.addEventListener('click', function() {
+                    dropdownMenu.classList.toggle('hidden');
+                });
+            }
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(event) {
+                if (dropdownToggle && dropdownMenu) {
+                    if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                        dropdownMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
